@@ -9,21 +9,15 @@ const Header = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-12">
-          <a href="#technical" className="text-foreground hover:opacity-60 transition-opacity font-medium">
-            Technical Info
-          </a>
+          <a href="#technical" className="text-foreground hover:opacity-60 transition-opacity font-medium">Home</a>
           <a href="#about" className="text-foreground hover:opacity-60 transition-opacity font-medium">
             About
           </a>
-          <a href="#resources" className="text-foreground hover:opacity-60 transition-opacity font-medium">
-            Resources
-          </a>
+          <a href="#resources" className="text-foreground hover:opacity-60 transition-opacity font-medium">Contact Us</a>
         </div>
 
         {/* Contact Button */}
-        <Button variant="default" className="px-8 rounded-3xl">
-          Contact
-        </Button>
+        <Button variant="default" className="px-8 rounded-3xl">Case Studies</Button>
       </nav>
     </header>;
 };
