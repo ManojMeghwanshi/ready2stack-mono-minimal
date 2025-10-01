@@ -1,0 +1,56 @@
+import { Search, Layout, Shield } from "lucide-react";
+
+const steps = [
+  {
+    number: "01",
+    icon: Search,
+    title: "SEO Optimized",
+    description: "Built with search engine optimization at the core, ensuring maximum visibility and organic reach for your digital presence."
+  },
+  {
+    number: "02",
+    icon: Layout,
+    title: "Flexible Layouts",
+    description: "Responsive design systems that adapt seamlessly across all devices, providing consistent user experiences everywhere."
+  },
+  {
+    number: "03",
+    icon: Shield,
+    title: "Security First",
+    description: "Enterprise-grade security measures integrated from the ground up, protecting your data and your users' privacy."
+  }
+];
+
+const ProcessSteps = () => {
+  return (
+    <section className="container mx-auto px-6 py-24 md:py-32">
+      <h2 className="text-4xl md:text-5xl font-bold mb-16 tracking-tight text-center">
+        Our Process
+      </h2>
+      
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        {steps.map((step) => {
+          const Icon = step.icon;
+          return (
+            <div key={step.number} className="text-center group">
+              <div className="mb-6 inline-flex items-center justify-center w-20 h-20 border-2 border-foreground rounded-full group-hover:bg-foreground transition-colors duration-300">
+                <Icon className="w-10 h-10 group-hover:text-background transition-colors duration-300" />
+              </div>
+              <div className="text-sm font-mono mb-3 text-muted-foreground">
+                {step.number}
+              </div>
+              <h3 className="text-2xl font-bold mb-4">
+                {step.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
+export default ProcessSteps;
