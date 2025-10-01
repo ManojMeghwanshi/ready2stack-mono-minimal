@@ -39,12 +39,12 @@ const caseStudies = [{
   size: "large"
 }];
 const FeaturedWork = () => {
-  return <section className="container mx-auto px-6 py-24 md:py-32">
-      <h2 className="text-4xl mb-16 tracking-tight font-light md:text-7xl">
+  return <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-12 sm:mb-16 tracking-tight font-light">
         Featured Work ↘
       </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[280px]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 auto-rows-[240px] sm:auto-rows-[280px]">
         {caseStudies.map(study => <Card 
             key={study.id} 
             className={`group cursor-pointer border border-border hover:border-foreground transition-all duration-300 overflow-hidden ${
@@ -56,15 +56,15 @@ const FeaturedWork = () => {
                 <img src={study.image} alt={study.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               </div>
               <div className="absolute inset-0 bg-foreground/60 group-hover:bg-foreground/70 transition-colors duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-background">
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 text-background">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl font-semibold mb-2">{study.title}</h3>
-                    <p className="text-background/80 text-sm">
+                    <h3 className="text-base sm:text-lg md:text-xl font-semibold mb-1 sm:mb-2">{study.title}</h3>
+                    <p className="text-background/80 text-xs sm:text-sm">
                       {study.description}
                     </p>
                   </div>
-                  <ArrowUpRight className="w-5 h-5 flex-shrink-0 ml-4 opacity-80" />
+                  <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 ml-2 sm:ml-4 opacity-80" />
                 </div>
               </div>
             </CardContent>
