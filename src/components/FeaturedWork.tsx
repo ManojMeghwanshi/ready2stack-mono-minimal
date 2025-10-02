@@ -9,7 +9,6 @@ import financialImg from "@/assets/financial-dark.jpg";
 import healthcareImg from "@/assets/healthcare-dark.jpg";
 import saasImg from "@/assets/saas-dark.jpg";
 import brandImg from "@/assets/brand-dark.jpg";
-
 const caseStudies = [{
   id: 1,
   title: "E-Commerce Platform Redesign",
@@ -42,32 +41,23 @@ const caseStudies = [{
   size: "small"
 }];
 const FeaturedWork = () => {
-  const { elementRef, isVisible } = useScrollAnimation(0.15);
-  const { isActive, position, handleMouseEnter, handleMouseLeave } = useCustomCursor();
-
-  return (
-    <>
-      {createPortal(
-        <CustomCursor isActive={isActive} x={position.x} y={position.y} />,
-        document.body
-      )}
-      <section
-    ref={elementRef as React.RefObject<HTMLElement>}
-    className={`container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
-  >
-      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-12 sm:mb-16 tracking-tight font-light">
-        Featured Work ↘
-      </h2>
+  const {
+    elementRef,
+    isVisible
+  } = useScrollAnimation(0.15);
+  const {
+    isActive,
+    position,
+    handleMouseEnter,
+    handleMouseLeave
+  } = useCustomCursor();
+  return <>
+      {createPortal(<CustomCursor isActive={isActive} x={position.x} y={position.y} />, document.body)}
+      <section ref={elementRef as React.RefObject<HTMLElement>} className={`container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
+      <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-12 sm:mb-16 tracking-tight font-light">Case Studies ↘</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 auto-rows-[240px] sm:auto-rows-[280px]">
-        {caseStudies.map(study => <Card 
-            key={study.id}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            className={`group cursor-none border border-border hover:border-foreground transition-all duration-300 overflow-hidden ${
-              study.size === 'large' ? 'md:col-span-2' : 'md:col-span-1'
-            }`}
-          >
+        {caseStudies.map(study => <Card key={study.id} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`group cursor-none border border-border hover:border-foreground transition-all duration-300 overflow-hidden ${study.size === 'large' ? 'md:col-span-2' : 'md:col-span-1'}`}>
             <CardContent className="p-0 h-full relative">
               <div className="absolute inset-0 bg-muted">
                 <img src={study.image} alt={study.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -88,7 +78,6 @@ const FeaturedWork = () => {
           </Card>)}
       </div>
     </section>
-    </>
-  );
+    </>;
 };
 export default FeaturedWork;
