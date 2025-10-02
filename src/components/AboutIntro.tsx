@@ -1,5 +1,12 @@
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
 const AboutIntro = () => {
-  return <section className="px-4 sm:px-6 py-16 sm:py-24 md:py-32 bg-transparent">
+  const { elementRef, isVisible } = useScrollAnimation(0.2);
+
+  return <section 
+    ref={elementRef as React.RefObject<HTMLElement>}
+    className={`px-4 sm:px-6 py-16 sm:py-24 md:py-32 bg-transparent scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+  >
       <div className="container mx-auto max-w-7xl">
         <h2 className="text-xs sm:text-sm font-normal mb-6 sm:mb-8 tracking-wide">
           About

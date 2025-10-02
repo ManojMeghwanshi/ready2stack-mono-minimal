@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const caseStudies = [{
   id: 1,
@@ -39,7 +40,12 @@ const caseStudies = [{
   size: "large"
 }];
 const FeaturedWork = () => {
-  return <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
+  const { elementRef, isVisible } = useScrollAnimation(0.15);
+
+  return <section 
+    ref={elementRef as React.RefObject<HTMLElement>}
+    className={`container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+  >
       <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-12 sm:mb-16 tracking-tight font-light">
         Featured Work ↘
       </h2>

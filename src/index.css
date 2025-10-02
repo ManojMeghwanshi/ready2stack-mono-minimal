@@ -109,6 +109,24 @@ All colors MUST be HSL.
     animation: float 16s ease-in-out infinite;
     animation-delay: 5s;
   }
+
+  /* Scroll animations */
+  .scroll-hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .scroll-hidden-delay {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s;
+  }
 }
 
 @layer base {

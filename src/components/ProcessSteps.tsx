@@ -1,4 +1,5 @@
 import { Search, Layout, Shield } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const steps = [
   {
@@ -22,8 +23,13 @@ const steps = [
 ];
 
 const ProcessSteps = () => {
+  const { elementRef, isVisible } = useScrollAnimation(0.15);
+
   return (
-    <section className="container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32">
+    <section 
+      ref={elementRef as React.RefObject<HTMLElement>}
+      className={`container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+    >
       <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-12 sm:mb-16 tracking-tight text-center">
         Our Process
       </h2>
