@@ -1,6 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useCustomCursor } from "@/hooks/useCustomCursor";
+import CustomCursor from "@/components/CustomCursor";
+import { createPortal } from "react-dom";
 
 const caseStudies = [{
   id: 1,
@@ -41,8 +44,15 @@ const caseStudies = [{
 }];
 const FeaturedWork = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.15);
+  const { isActive, position, handleMouseEnter, handleMouseLeave } = useCustomCursor();
 
-  return <section 
+  return (
+    <>
+      {createPortal(
+        <CustomCursor isActive={isActive} x={position.x} y={position.y} />,
+        document.body
+      )}
+      <section
     ref={elementRef as React.RefObject<HTMLElement>}
     className={`container mx-auto px-4 sm:px-6 py-16 sm:py-24 md:py-32 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
   >
@@ -52,8 +62,10 @@ const FeaturedWork = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 auto-rows-[240px] sm:auto-rows-[280px]">
         {caseStudies.map(study => <Card 
-            key={study.id} 
-            className={`group cursor-pointer border border-border hover:border-foreground transition-all duration-300 overflow-hidden ${
+            key={study.id}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+            className={`group cursor-none border border-border hover:border-foreground transition-all duration-300 overflow-hidden ${
               study.size === 'large' ? 'md:col-span-2' : 'md:col-span-1'
             }`}
           >
@@ -76,6 +88,8 @@ const FeaturedWork = () => {
             </CardContent>
           </Card>)}
       </div>
-    </section>;
+    </section>
+    </>
+  );
 };
 export default FeaturedWork;
