@@ -4,43 +4,42 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCustomCursor } from "@/hooks/useCustomCursor";
 import CustomCursor from "@/components/CustomCursor";
 import { createPortal } from "react-dom";
+import ecommerceImg from "@/assets/ecommerce-dark.jpg";
+import financialImg from "@/assets/financial-dark.jpg";
+import healthcareImg from "@/assets/healthcare-dark.jpg";
+import saasImg from "@/assets/saas-dark.jpg";
+import brandImg from "@/assets/brand-dark.jpg";
 
 const caseStudies = [{
   id: 1,
   title: "E-Commerce Platform Redesign",
   description: "Modernizing the digital shopping experience",
-  image: "/placeholder.svg",
+  image: ecommerceImg,
   size: "large" // spans 2 columns
 }, {
   id: 2,
   title: "Financial Dashboard Application",
   description: "Real-time analytics and insights",
-  image: "/placeholder.svg",
+  image: financialImg,
   size: "small"
 }, {
   id: 3,
   title: "Healthcare Mobile App",
   description: "Patient-first digital healthcare",
-  image: "/placeholder.svg",
+  image: healthcareImg,
   size: "small"
 }, {
   id: 4,
   title: "SaaS Product Launch",
   description: "Scaling from MVP to enterprise",
-  image: "/placeholder.svg",
+  image: saasImg,
   size: "small"
 }, {
   id: 5,
   title: "Brand Identity System",
   description: "Complete visual identity overhaul",
-  image: "/placeholder.svg",
+  image: brandImg,
   size: "small"
-}, {
-  id: 6,
-  title: "AI-Powered Analytics",
-  description: "Machine learning insights platform",
-  image: "/placeholder.svg",
-  size: "large"
 }];
 const FeaturedWork = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.15);
