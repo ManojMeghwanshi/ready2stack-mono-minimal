@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  return <header className="bg-background border-b border-border">
+  return <header className="sticky top-0 z-50 bg-background border-b border-border">
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 md:py-5 flex items-center justify-between">
         {/* Logo */}
         <div className="text-base sm:text-lg md:text-xl font-bold tracking-tight">
