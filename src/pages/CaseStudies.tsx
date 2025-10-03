@@ -102,12 +102,12 @@ const CaseStudies = () => {
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 lg:py-24">
+        <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 sm:mb-8 tracking-tight">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 tracking-tight">
               Case Studies
             </h1>
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed px-2">
               Our clients around the world are achieving enduring change in their capabilities and performance. 
               Leading with technology, we partner with them to see new potential for growth, innovate to net zero, and 
               build capabilities across their entire organization, creating impact that goes beyond financial and 
@@ -119,9 +119,9 @@ const CaseStudies = () => {
         {/* Case Studies Grid */}
         <section 
           ref={elementRef as React.RefObject<HTMLElement>}
-          className={`container mx-auto px-4 sm:px-6 pb-12 sm:pb-16 md:pb-20 lg:pb-24 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
+          className={`container mx-auto px-4 sm:px-6 pb-8 sm:pb-12 md:pb-16 lg:pb-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {caseStudiesData.map((study) => (
               <Card 
                 key={study.id}
@@ -134,18 +134,19 @@ const CaseStudies = () => {
                       src={study.image} 
                       alt={study.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      loading="lazy"
                     />
                   </div>
                   
                   {/* Content */}
-                  <div className="p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-semibold mb-2 sm:mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                  <div className="p-3 sm:p-4 md:p-5">
+                    <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-1.5 sm:mb-2 md:mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
                       {study.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-3 sm:mb-4 line-clamp-3">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4 line-clamp-3 leading-relaxed">
                       {study.summary}
                     </p>
-                    <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+                    <div className="flex flex-col gap-0.5 sm:gap-1 text-[10px] sm:text-xs text-muted-foreground">
                       <span>{study.date}</span>
                       <span className="font-medium">{study.industry}</span>
                     </div>
