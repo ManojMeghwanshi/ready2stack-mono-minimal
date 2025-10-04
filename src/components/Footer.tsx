@@ -1,12 +1,10 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-
 const Footer = () => {
-  const { elementRef, isVisible } = useScrollAnimation(0.1);
-
-  return <footer 
-    ref={elementRef as React.RefObject<HTMLElement>}
-    className={`bg-primary text-primary-foreground py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
-  >
+  const {
+    elementRef,
+    isVisible
+  } = useScrollAnimation(0.1);
+  return <footer ref={elementRef as React.RefObject<HTMLElement>} className={`bg-primary text-primary-foreground py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
       <div className="container mx-auto px-4 sm:px-6">
         {/* Main CTA */}
         <div className="text-center mb-16 sm:mb-20 md:mb-24">
@@ -19,21 +17,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16 mb-12 sm:mb-16">
           {/* Left - Navigation Menu */}
           <div className="flex flex-col gap-3 sm:gap-4">
-            <a href="#about" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">
-              About
-            </a>
-            <a href="#work" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">
-              Work
-            </a>
-            <a href="#careers" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">
-              Careers
-            </a>
-            <a href="#contact" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">
-              Contact
-            </a>
-            <a href="#cookies" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">
-              Cookie Settings
-            </a>
+            <a href="#about" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit"></a>
+            <a href="#work" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Home</a>
+            <a href="#careers" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Case Studies</a>
+            <a href="#contact" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Contact Us
+          </a>
+            <a href="#cookies" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">About</a>
           </div>
 
           {/* Right - Address */}
