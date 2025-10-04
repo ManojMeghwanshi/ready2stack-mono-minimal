@@ -1,4 +1,5 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Link } from "react-router-dom";
 const Footer = () => {
   const {
     elementRef,
@@ -17,12 +18,10 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 sm:gap-16 mb-12 sm:mb-16">
           {/* Left - Navigation Menu */}
           <div className="flex flex-col gap-3 sm:gap-4">
-            <a href="#about" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit"></a>
-            <a href="#work" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Home</a>
-            <a href="#careers" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Case Studies</a>
-            <a href="#contact" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Contact Us
-          </a>
-            <a href="#cookies" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">About</a>
+            <a href="/" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Home</a>
+            <a href="/case-studies" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Case Studies</a>
+            <a href="/about" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">About</a>
+            <a href="/contact" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Contact Us</a>
           </div>
 
           {/* Right - Address */}

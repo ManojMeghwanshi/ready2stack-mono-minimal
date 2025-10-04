@@ -5,17 +5,17 @@ const Header = () => {
   return <header className="sticky top-0 z-50 bg-background border-b border-border">
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 md:py-5 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-base sm:text-lg md:text-xl font-bold tracking-tight">
+        <Link to="/" className="text-base sm:text-lg md:text-xl font-bold tracking-tight hover:opacity-60 transition-opacity">
           Ready 2 Stack
-        </div>
+        </Link>
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center gap-6 lg:gap-10">
-          <a href="#technical" className="text-sm lg:text-base text-foreground hover:opacity-60 transition-opacity font-medium">Home</a>
-          <a href="#about" className="text-sm lg:text-base text-foreground hover:opacity-60 transition-opacity font-medium">
+          <Link to="/" className="text-sm lg:text-base text-foreground hover:opacity-60 transition-opacity font-medium">Home</Link>
+          <Link to="/about" className="text-sm lg:text-base text-foreground hover:opacity-60 transition-opacity font-medium">
             About
-          </a>
-          <a href="#resources" className="text-sm lg:text-base text-foreground hover:opacity-60 transition-opacity font-medium">Contact Us</a>
+          </Link>
+          <Link to="/contact" className="text-sm lg:text-base text-foreground hover:opacity-60 transition-opacity font-medium">Contact Us</Link>
         </div>
 
         {/* Contact Button */}
