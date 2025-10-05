@@ -1,12 +1,40 @@
+import { useEffect, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { caseStudiesData } from "@/data/caseStudiesData";
+import { supabase } from "@/integrations/supabase/client";
+
+interface CaseStudy {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  image_url: string;
+  created_at: string;
+}
 
 const CaseStudies = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.15);
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchCaseStudies();
+  }, []);
+
+  const fetchCaseStudies = async () => {
+    const { data, error } = await supabase
+      .from("case_studies")
+      .select("id, title, description, category, image_url, created_at")
+      .order("created_at", { ascending: false });
+
+    if (!error && data) {
+      setCaseStudies(data);
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -32,41 +60,51 @@ const CaseStudies = () => {
           ref={elementRef as React.RefObject<HTMLElement>}
           className={`container mx-auto px-4 sm:px-6 pb-8 sm:pb-12 md:pb-16 lg:pb-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-            {caseStudiesData.map((study) => (
-              <Link key={study.id} to={`/case-studies/${study.id}`}>
-                <Card 
-                  className="group cursor-pointer border border-border hover:border-foreground transition-all duration-300 overflow-hidden hover:shadow-lg"
-                >
-                  <CardContent className="p-0">
-                  {/* Image */}
-                  <div className="aspect-[16/10] overflow-hidden bg-muted">
-                    <img 
-                      src={study.image} 
-                      alt={study.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="p-3 sm:p-4 md:p-5">
-                    <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-1.5 sm:mb-2 md:mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
-                      {study.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4 line-clamp-3 leading-relaxed">
-                      {study.summary}
-                    </p>
-                    <div className="flex flex-col gap-0.5 sm:gap-1 text-[10px] sm:text-xs text-muted-foreground">
-                      <span>{study.date}</span>
-                      <span className="font-medium">{study.industry}</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              </Link>
-            ))}
-          </div>
+          {loading ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">Loading case studies...</p>
+            </div>
+          ) : caseStudies.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No case studies available yet.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+              {caseStudies.map((study) => (
+                <Link key={study.id} to={`/case-studies/${study.id}`}>
+                  <Card 
+                    className="group cursor-pointer border border-border hover:border-foreground transition-all duration-300 overflow-hidden hover:shadow-lg"
+                  >
+                    <CardContent className="p-0">
+                      {/* Image */}
+                      <div className="aspect-[16/10] overflow-hidden bg-muted">
+                        <img 
+                          src={study.image_url} 
+                          alt={study.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          loading="lazy"
+                        />
+                      </div>
+                      
+                      {/* Content */}
+                      <div className="p-3 sm:p-4 md:p-5">
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-1.5 sm:mb-2 md:mb-3 line-clamp-2 group-hover:text-primary transition-colors leading-snug">
+                          {study.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-muted-foreground mb-2 sm:mb-3 md:mb-4 line-clamp-3 leading-relaxed">
+                          {study.description}
+                        </p>
+                        <div className="flex flex-col gap-0.5 sm:gap-1 text-[10px] sm:text-xs text-muted-foreground">
+                          <span>{new Date(study.created_at).toLocaleDateString()}</span>
+                          <span className="font-medium">{study.category}</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          )}
         </section>
       </main>
       <Footer />

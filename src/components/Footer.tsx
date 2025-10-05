@@ -22,6 +22,7 @@ const Footer = () => {
             <a href="/case-studies" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Case Studies</a>
             <a href="/about" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">About</a>
             <a href="/contact" className="text-base sm:text-lg hover:opacity-60 transition-opacity w-fit">Contact Us</a>
+            <Link to="/auth" className="text-sm opacity-60 hover:opacity-100 transition-opacity w-fit mt-4">Admin Login</Link>
           </div>
 
           {/* Right - Address */}
