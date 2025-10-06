@@ -20,6 +20,7 @@ interface CaseStudy {
   metrics?: any;
   testimonial?: any;
   additional_images?: string[] | null;
+  rich_content?: string | null;
   created_at: string;
 }
 
@@ -67,7 +68,7 @@ const CaseStudyDetail = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow page-content pb-96">
         {/* Back Navigation */}
         <section className="container mx-auto px-4 sm:px-6 pt-6 sm:pt-8 md:pt-10">
           <Link to="/case-studies">
@@ -124,102 +125,105 @@ const CaseStudyDetail = () => {
           className={`container mx-auto px-4 sm:px-6 pb-12 sm:pb-16 md:pb-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
         >
           <div className="max-w-4xl mx-auto space-y-12 sm:space-y-16 md:space-y-20">
-            {/* Challenge/Problem */}
-            {caseStudy.challenge && (
-              <div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 tracking-tight">
-                  The Challenge
-                </h2>
-                <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
-                  <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
-                    {caseStudy.challenge}
-                  </p>
-                </div>
-              </div>
+            {/* Rich Content */}
+            {caseStudy.rich_content && (
+              <div 
+                className="rich-text-content prose prose-lg max-w-none"
+                dangerouslySetInnerHTML={{ __html: caseStudy.rich_content }}
+              />
             )}
 
-            {/* Solution */}
-            {caseStudy.solution && (
-              <div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 tracking-tight">
-                  Our Solution
-                </h2>
-                <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
-                  <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
-                    {caseStudy.solution}
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Additional Images */}
-            {caseStudy.additional_images && caseStudy.additional_images.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-                {caseStudy.additional_images.map((img, index) => (
-                  <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
-                    <img 
-                      src={img} 
-                      alt={`${caseStudy.title} - Image ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Results */}
-            {caseStudy.results && (
-              <div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 tracking-tight">
-                  The Results
-                </h2>
-                <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
-                  <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground mb-6">
-                    {caseStudy.results}
-                  </p>
-                  {caseStudy.metrics && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
-                      {Array.isArray(caseStudy.metrics) && caseStudy.metrics.map((metric: any, index: number) => (
-                        <div key={index} className="border border-border rounded-lg p-4 sm:p-6">
-                          <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-primary">
-                            {metric.value}
-                          </div>
-                          <div className="text-xs sm:text-sm text-muted-foreground">
-                            {metric.label}
-                          </div>
-                        </div>
-                      ))}
+            {/* Legacy content sections (shown if rich_content is not available) */}
+            {!caseStudy.rich_content && (
+              <>
+                {/* Challenge/Problem */}
+                {caseStudy.challenge && (
+                  <div>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 tracking-tight">
+                      The Challenge
+                    </h2>
+                    <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
+                        {caseStudy.challenge}
+                      </p>
                     </div>
-                  )}
-                </div>
-              </div>
-            )}
+                  </div>
+                )}
 
-            {/* Client Testimonial */}
-            {caseStudy.testimonial && (
-              <div className="border-l-4 border-primary pl-6 sm:pl-8 py-2">
-                <blockquote className="text-base sm:text-lg md:text-xl italic leading-relaxed mb-4 text-foreground">
-                  "{caseStudy.testimonial.quote}"
-                </blockquote>
-                <div className="text-sm sm:text-base text-muted-foreground">
-                  <div className="font-semibold">{caseStudy.testimonial.author}</div>
-                  <div>{caseStudy.testimonial.position}</div>
-                </div>
-              </div>
+                {/* Solution */}
+                {caseStudy.solution && (
+                  <div>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 tracking-tight">
+                      Our Solution
+                    </h2>
+                    <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground">
+                        {caseStudy.solution}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Additional Images */}
+                {caseStudy.additional_images && caseStudy.additional_images.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                    {caseStudy.additional_images.map((img, index) => (
+                      <div key={index} className="aspect-[4/3] overflow-hidden rounded-lg bg-muted">
+                        <img 
+                          src={img} 
+                          alt={`${caseStudy.title} - Image ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Results */}
+                {caseStudy.results && (
+                  <div>
+                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 tracking-tight">
+                      The Results
+                    </h2>
+                    <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
+                      <p className="text-sm sm:text-base md:text-lg leading-relaxed text-muted-foreground mb-6">
+                        {caseStudy.results}
+                      </p>
+                      {caseStudy.metrics && (
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+                          {Array.isArray(caseStudy.metrics) && caseStudy.metrics.map((metric: any, index: number) => (
+                            <div key={index} className="border border-border rounded-lg p-4 sm:p-6">
+                              <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-primary">
+                                {metric.value}
+                              </div>
+                              <div className="text-xs sm:text-sm text-muted-foreground">
+                                {metric.label}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Client Testimonial */}
+                {caseStudy.testimonial && (
+                  <div className="border-l-4 border-primary pl-6 sm:pl-8 py-2">
+                    <blockquote className="text-base sm:text-lg md:text-xl italic leading-relaxed mb-4 text-foreground">
+                      "{caseStudy.testimonial.quote}"
+                    </blockquote>
+                    <div className="text-sm sm:text-base text-muted-foreground">
+                      <div className="font-semibold">{caseStudy.testimonial.author}</div>
+                      <div>{caseStudy.testimonial.position}</div>
+                    </div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </section>
 
-        {/* Back to Case Studies CTA */}
-        <section className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-16 md:pb-20">
-          <div className="max-w-4xl mx-auto text-center border-t border-border pt-12 sm:pt-16">
-            <Link to="/case-studies">
-              <Button size="lg" className="gap-2">
-                View All Case Studies
-              </Button>
-            </Link>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>

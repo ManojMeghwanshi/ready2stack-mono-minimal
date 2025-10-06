@@ -34,8 +34,40 @@ const Auth = () => {
       }
     });
 
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    // Set up session timeout on inactivity (30 minutes)
+    let timeout: NodeJS.Timeout;
+    
+    const resetTimeout = () => {
+      clearTimeout(timeout);
+      timeout = setTimeout(async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          await supabase.auth.signOut();
+          toast({
+            title: "Session expired",
+            description: "You've been logged out due to inactivity.",
+          });
+          navigate("/auth");
+        }
+      }, 30 * 60 * 1000); // 30 minutes
+    };
+
+    // Reset timeout on user activity
+    const activityEvents = ['mousedown', 'keydown', 'scroll', 'touchstart'];
+    activityEvents.forEach(event => {
+      window.addEventListener(event, resetTimeout);
+    });
+
+    resetTimeout();
+
+    return () => {
+      clearTimeout(timeout);
+      activityEvents.forEach(event => {
+        window.removeEventListener(event, resetTimeout);
+      });
+      subscription.unsubscribe();
+    };
+  }, [navigate, toast]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();

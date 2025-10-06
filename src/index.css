@@ -169,9 +169,74 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    position: relative;
+  }
+
+  .page-content {
+    position: relative;
+    z-index: 1;
+    background: hsl(var(--background));
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-semibold tracking-tight;
   }
+}
+
+/* Rich Text Editor Styles */
+.rich-text-editor .ql-container {
+  min-height: 300px;
+  font-size: 16px;
+  border-color: hsl(var(--border));
+}
+
+.rich-text-editor .ql-editor {
+  min-height: 300px;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+.rich-text-editor .ql-toolbar {
+  background: hsl(var(--muted));
+  border-color: hsl(var(--border));
+}
+
+.rich-text-editor .ql-stroke {
+  stroke: hsl(var(--foreground));
+}
+
+.rich-text-editor .ql-fill {
+  fill: hsl(var(--foreground));
+}
+
+.rich-text-editor .ql-picker-label {
+  color: hsl(var(--foreground));
+}
+
+/* Rendered rich text content */
+.rich-text-content {
+  max-width: none;
+}
+
+.rich-text-content img {
+  @apply rounded-lg my-4;
+}
+
+.rich-text-content h1, 
+.rich-text-content h2, 
+.rich-text-content h3 {
+  @apply font-bold mb-4 mt-6;
+}
+
+.rich-text-content p {
+  @apply mb-4 leading-relaxed;
+}
+
+.rich-text-content ul, 
+.rich-text-content ol {
+  @apply ml-6 mb-4;
+}
+
+.rich-text-content a {
+  @apply text-primary hover:underline;
 }

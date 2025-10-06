@@ -5,19 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import RichTextEditor from "@/components/RichTextEditor";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
 import { z } from "zod";
 
 const caseStudySchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200),
-  subtitle: z.string().trim().max(300).optional(),
-  description: z.string().trim().min(1, "Description is required").max(5000),
+  subtitle: z.string().trim().min(1, "Subtitle is required").max(300),
   category: z.string().trim().min(1, "Category is required").max(100),
   image_url: z.string().trim().url("Must be a valid URL").max(500),
-  challenge: z.string().trim().max(5000).optional(),
-  solution: z.string().trim().max(5000).optional(),
-  results: z.string().trim().max(5000).optional(),
+  description: z.string().trim().min(1, "Description is required").max(5000),
+  rich_content: z.string().trim().min(1, "Content is required"),
 });
 
 const AddCaseStudy = () => {
@@ -32,9 +31,7 @@ const AddCaseStudy = () => {
     description: "",
     category: "",
     image_url: "",
-    challenge: "",
-    solution: "",
-    results: "",
+    rich_content: "",
   });
 
   useEffect(() => {
@@ -72,6 +69,10 @@ const AddCaseStudy = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleRichContentChange = (value: string) => {
+    setFormData({ ...formData, rich_content: value });
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -82,13 +83,11 @@ const AddCaseStudy = () => {
       const { error } = await supabase.from("case_studies").insert([
         {
           title: validated.title,
-          subtitle: validated.subtitle || null,
+          subtitle: validated.subtitle,
           description: validated.description,
           category: validated.category,
           image_url: validated.image_url,
-          challenge: validated.challenge || null,
-          solution: validated.solution || null,
-          results: validated.results || null,
+          rich_content: validated.rich_content,
         },
       ]);
 
@@ -135,7 +134,7 @@ const AddCaseStudy = () => {
       </header>
 
       <main className="container mx-auto px-4 py-12">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-8">Add New Case Study</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -153,14 +152,15 @@ const AddCaseStudy = () => {
             </div>
 
             <div>
-              <Label htmlFor="subtitle">Subtitle</Label>
+              <Label htmlFor="subtitle">Subtitle *</Label>
               <Input
                 id="subtitle"
                 name="subtitle"
                 value={formData.subtitle}
                 onChange={handleChange}
+                required
                 maxLength={300}
-                placeholder="Brief subtitle (optional)"
+                placeholder="Brief subtitle"
               />
             </div>
 
@@ -189,10 +189,13 @@ const AddCaseStudy = () => {
                 maxLength={500}
                 placeholder="https://example.com/image.jpg"
               />
+              <p className="text-xs text-muted-foreground mt-1">
+                Use bright, web-friendly images with good contrast
+              </p>
             </div>
 
             <div>
-              <Label htmlFor="description">Description *</Label>
+              <Label htmlFor="description">Brief Description *</Label>
               <Textarea
                 id="description"
                 name="description"
@@ -200,51 +203,24 @@ const AddCaseStudy = () => {
                 onChange={handleChange}
                 required
                 maxLength={5000}
-                placeholder="Brief overview of the project"
-                className="min-h-[100px]"
+                placeholder="Brief overview shown in case study listings"
+                className="min-h-[80px]"
               />
             </div>
 
             <div>
-              <Label htmlFor="challenge">Challenge</Label>
-              <Textarea
-                id="challenge"
-                name="challenge"
-                value={formData.challenge}
-                onChange={handleChange}
-                maxLength={5000}
-                placeholder="What problem needed to be solved?"
-                className="min-h-[100px]"
+              <Label htmlFor="rich_content">Full Content * (Rich Text)</Label>
+              <p className="text-sm text-muted-foreground mb-2">
+                Add your full case study content with formatting, images, headings, and links
+              </p>
+              <RichTextEditor
+                value={formData.rich_content}
+                onChange={handleRichContentChange}
+                placeholder="Write your full case study content here..."
               />
             </div>
 
-            <div>
-              <Label htmlFor="solution">Solution</Label>
-              <Textarea
-                id="solution"
-                name="solution"
-                value={formData.solution}
-                onChange={handleChange}
-                maxLength={5000}
-                placeholder="How was the problem addressed?"
-                className="min-h-[100px]"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="results">Results</Label>
-              <Textarea
-                id="results"
-                name="results"
-                value={formData.results}
-                onChange={handleChange}
-                maxLength={5000}
-                placeholder="What were the outcomes?"
-                className="min-h-[100px]"
-              />
-            </div>
-
-            <div className="flex gap-4">
+            <div className="flex gap-4 pt-4">
               <Button type="submit" disabled={loading}>
                 {loading ? "Creating..." : "Create Case Study"}
               </Button>

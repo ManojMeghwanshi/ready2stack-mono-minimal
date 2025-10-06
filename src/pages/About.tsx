@@ -10,7 +10,7 @@ const About = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow page-content pb-96">
         {/* Intro Text Section - Matches Homepage About */}
         <section 
           ref={introRef as React.RefObject<HTMLElement>}

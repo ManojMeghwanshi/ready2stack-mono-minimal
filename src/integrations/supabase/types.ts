@@ -26,6 +26,7 @@ export type Database = {
           image_url: string
           metrics: Json | null
           results: string | null
+          rich_content: string | null
           solution: string | null
           subtitle: string | null
           testimonial: Json | null
@@ -43,6 +44,7 @@ export type Database = {
           image_url: string
           metrics?: Json | null
           results?: string | null
+          rich_content?: string | null
           solution?: string | null
           subtitle?: string | null
           testimonial?: Json | null
@@ -60,6 +62,7 @@ export type Database = {
           image_url?: string
           metrics?: Json | null
           results?: string | null
+          rich_content?: string | null
           solution?: string | null
           subtitle?: string | null
           testimonial?: Json | null
