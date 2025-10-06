@@ -5,7 +5,7 @@ const Footer = () => {
     elementRef,
     isVisible
   } = useScrollAnimation(0.1);
-  return <footer ref={elementRef as React.RefObject<HTMLElement>} className={`fixed bottom-0 left-0 right-0 bg-primary text-primary-foreground py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
+  return <footer ref={elementRef as React.RefObject<HTMLElement>} className={`bg-primary text-primary-foreground py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
       <div className="container mx-auto px-4 sm:px-6">
         {/* Main CTA */}
         <div className="text-center mb-16 sm:mb-20 md:mb-24">

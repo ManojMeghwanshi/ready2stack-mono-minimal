@@ -10,8 +10,8 @@ const Contact = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
-      <main className="flex-grow page-content pb-96">
-        <section
+      <main className="flex-grow">
+        <section 
           ref={elementRef as React.RefObject<HTMLElement>}
           className={`container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
         >

@@ -39,7 +39,7 @@ const CaseStudies = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow page-content pb-96">
+      <main className="flex-grow">
         {/* Hero Section */}
         <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16 lg:py-20">
           <div className="max-w-4xl mx-auto text-center">
