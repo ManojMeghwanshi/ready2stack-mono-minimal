@@ -3,7 +3,7 @@ const Hero = () => {
   return <section className="relative container mx-auto px-4 sm:px-6 py-24 sm:py-32 md:py-40 lg:py-48 overflow-hidden">
       <HeroAnimation />
       <div className="relative z-10 max-w-5xl mx-auto text-center">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 tracking-tighter leading-tight animate-fade-in">Research. Analyze.
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 md:mb-8 tracking-tighter leading-tight animate-fade-in">Research. Analyze. 
 Reveal.
         <br />
           Excellence
