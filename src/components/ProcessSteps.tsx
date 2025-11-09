@@ -1,12 +1,12 @@
-import { Search, Layout, Shield } from "lucide-react";
+import { TrendingUp, Layout, Shield } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const steps = [
   {
     number: "01",
-    icon: Search,
-    title: "SEO Optimized",
-    description: "Built with search engine optimization at the core, ensuring maximum visibility and organic reach for your digital presence."
+    icon: TrendingUp,
+    title: "Data Analysis",
+    description: "Advanced analytics and insights to drive informed decisions and optimize your business performance."
   },
   {
     number: "02",
