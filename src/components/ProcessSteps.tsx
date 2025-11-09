@@ -1,24 +1,24 @@
-import { TrendingUp, Layout, Shield } from "lucide-react";
+import { Search, TrendingUp, FileText } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const steps = [
   {
     number: "01",
-    icon: TrendingUp,
-    title: "Data Analysis",
-    description: "Advanced analytics and insights to drive informed decisions and optimize your business performance."
+    icon: Search,
+    title: "Research",
+    description: "Related to research."
   },
   {
     number: "02",
-    icon: Layout,
-    title: "Flexible Layouts",
-    description: "Responsive design systems that adapt seamlessly across all devices, providing consistent user experiences everywhere."
+    icon: TrendingUp,
+    title: "Analyze",
+    description: "Related to analyze."
   },
   {
     number: "03",
-    icon: Shield,
-    title: "Security First",
-    description: "Enterprise-grade security measures integrated from the ground up, protecting your data and your users' privacy."
+    icon: FileText,
+    title: "Case Study",
+    description: "Related to case study."
   }
 ];
 
