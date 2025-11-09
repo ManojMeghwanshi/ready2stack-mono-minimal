@@ -1,4 +1,4 @@
-import { Search, Layout, Shield, TrendingUp } from "lucide-react";
+import { Search, Layout, Shield } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const steps = [
@@ -19,12 +19,6 @@ const steps = [
     icon: Shield,
     title: "Security First",
     description: "Enterprise-grade security measures integrated from the ground up, protecting your data and your users' privacy."
-  },
-  {
-    number: "04",
-    icon: TrendingUp,
-    title: "Data-Driven Analysis",
-    description: "Comprehensive analytics and insights to track performance, understand user behavior, and make informed decisions."
   }
 ];
 
@@ -40,7 +34,7 @@ const ProcessSteps = () => {
         Our Process
       </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
         {steps.map((step) => {
           const Icon = step.icon;
           return (
