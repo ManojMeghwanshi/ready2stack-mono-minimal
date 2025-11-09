@@ -5,7 +5,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-
 interface CaseStudy {
   id: string;
   title: string;
@@ -14,30 +13,29 @@ interface CaseStudy {
   image_url: string;
   created_at: string;
 }
-
 const CaseStudies = () => {
-  const { elementRef, isVisible } = useScrollAnimation(0.15);
+  const {
+    elementRef,
+    isVisible
+  } = useScrollAnimation(0.15);
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     fetchCaseStudies();
   }, []);
-
   const fetchCaseStudies = async () => {
-    const { data, error } = await supabase
-      .from("case_studies")
-      .select("id, title, description, category, image_url, created_at")
-      .order("created_at", { ascending: false });
-
+    const {
+      data,
+      error
+    } = await supabase.from("case_studies").select("id, title, description, category, image_url, created_at").order("created_at", {
+      ascending: false
+    });
     if (!error && data) {
       setCaseStudies(data);
     }
     setLoading(false);
   };
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-grow">
         {/* Hero Section */}
@@ -46,44 +44,23 @@ const CaseStudies = () => {
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 md:mb-8 tracking-tight">
               Case Studies
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed px-2">
-              Our clients around the world are achieving enduring change in their capabilities and performance. 
-              Leading with technology, we partner with them to see new potential for growth, innovate to net zero, and 
-              build capabilities across their entire organization, creating impact that goes beyond financial and 
-              operational performance improvements. Here's what that looks like.
-            </p>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground leading-relaxed px-2 text-center">We decode complex topics into simple, easy-to-understand insights for anyone who needs them</p>
           </div>
         </section>
 
         {/* Case Studies Grid */}
-        <section 
-          ref={elementRef as React.RefObject<HTMLElement>}
-          className={`container mx-auto px-4 sm:px-6 pb-8 sm:pb-12 md:pb-16 lg:pb-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
-        >
-          {loading ? (
-            <div className="text-center py-12">
+        <section ref={elementRef as React.RefObject<HTMLElement>} className={`container mx-auto px-4 sm:px-6 pb-8 sm:pb-12 md:pb-16 lg:pb-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
+          {loading ? <div className="text-center py-12">
               <p className="text-muted-foreground">Loading case studies...</p>
-            </div>
-          ) : caseStudies.length === 0 ? (
-            <div className="text-center py-12">
+            </div> : caseStudies.length === 0 ? <div className="text-center py-12">
               <p className="text-muted-foreground">No case studies available yet.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-              {caseStudies.map((study) => (
-                <Link key={study.id} to={`/case-studies/${study.id}`}>
-                  <Card 
-                    className="group cursor-pointer border-0 transition-all duration-300 overflow-hidden hover:shadow-lg"
-                  >
+            </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+              {caseStudies.map(study => <Link key={study.id} to={`/case-studies/${study.id}`}>
+                  <Card className="group cursor-pointer border-0 transition-all duration-300 overflow-hidden hover:shadow-lg">
                     <CardContent className="p-0">
                       {/* Image */}
                       <div className="aspect-[16/10] overflow-hidden bg-muted">
-                        <img 
-                          src={study.image_url} 
-                          alt={study.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          loading="lazy"
-                        />
+                        <img src={study.image_url} alt={study.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                       </div>
                       
                       {/* Content */}
@@ -101,15 +78,11 @@ const CaseStudies = () => {
                       </div>
                     </CardContent>
                   </Card>
-                </Link>
-              ))}
-            </div>
-          )}
+                </Link>)}
+            </div>}
         </section>
       </main>
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default CaseStudies;
