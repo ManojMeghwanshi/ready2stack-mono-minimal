@@ -73,7 +73,7 @@ const CaseStudies = () => {
               {caseStudies.map((study) => (
                 <Link key={study.id} to={`/case-studies/${study.id}`}>
                   <Card 
-                    className="group cursor-pointer border-2 border-border hover:border-foreground transition-all duration-300 overflow-hidden hover:shadow-lg"
+                    className="group cursor-pointer border-0 transition-all duration-300 overflow-hidden hover:shadow-lg"
                   >
                     <CardContent className="p-0">
                       {/* Image */}
