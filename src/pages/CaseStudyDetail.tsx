@@ -82,12 +82,25 @@ const CaseStudyDetail = () => {
         <section className="container mx-auto px-4 sm:px-6 py-8 sm:py-12 md:py-16">
           <div className="max-w-4xl mx-auto">
             {/* Meta Info */}
-            <div className="flex flex-wrap gap-3 sm:gap-4 mb-4 sm:mb-6 text-xs sm:text-sm text-muted-foreground">
+            <div className="flex flex-wrap gap-3 sm:gap-4 mb-6 sm:mb-8 text-xs sm:text-sm text-muted-foreground">
               <span className="font-medium">{caseStudy.category}</span>
               <span>•</span>
               <span>{new Date(caseStudy.created_at).toLocaleDateString()}</span>
             </div>
-            
+          </div>
+
+          {/* Featured Image */}
+          <div className="max-w-6xl mx-auto mb-8 sm:mb-10 md:mb-12">
+            <div className="aspect-[16/9] overflow-hidden rounded-lg bg-muted">
+              <img 
+                src={caseStudy.image_url} 
+                alt={caseStudy.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
             {/* Title */}
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 md:mb-10 leading-tight tracking-tight">
               {caseStudy.title}
@@ -102,19 +115,6 @@ const CaseStudyDetail = () => {
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12">
               {caseStudy.description}
             </p>
-          </div>
-        </section>
-
-        {/* Featured Image */}
-        <section className="container mx-auto px-4 sm:px-6 mb-12 sm:mb-16 md:mb-20">
-          <div className="max-w-6xl mx-auto">
-            <div className="aspect-[16/9] overflow-hidden rounded-lg bg-muted">
-              <img 
-                src={caseStudy.image_url} 
-                alt={caseStudy.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
           </div>
         </section>
 
