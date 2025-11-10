@@ -14,6 +14,7 @@ const Auth = lazy(() => import("./pages/Auth"));
 const CrmDashboard = lazy(() => import("./pages/CrmDashboard"));
 const AddCaseStudy = lazy(() => import("./pages/AddCaseStudy"));
 const ManageCaseStudies = lazy(() => import("./pages/ManageCaseStudies"));
+const ManageSiteContent = lazy(() => import("./pages/ManageSiteContent"));
 const EditCaseStudy = lazy(() => import("./pages/EditCaseStudy"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/crm" element={<CrmDashboard />} />
             <Route path="/crm/add-case-study" element={<AddCaseStudy />} />
             <Route path="/crm/manage-case-studies" element={<ManageCaseStudies />} />
+            <Route path="/crm/manage-site-content" element={<ManageSiteContent />} />
             <Route path="/crm/edit-case-study/:id" element={<EditCaseStudy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

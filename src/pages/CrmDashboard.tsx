@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { User } from "@supabase/supabase-js";
-import { PlusCircle, Edit, LogOut } from "lucide-react";
+import { PlusCircle, Edit, LogOut, FileText } from "lucide-react";
 
 const CrmDashboard = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -102,7 +102,7 @@ const CrmDashboard = () => {
 
       <main className="container mx-auto px-4 py-12">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-8">Case Study Management</h1>
+          <h1 className="text-4xl font-bold mb-8">Dashboard</h1>
           
           <div className="grid md:grid-cols-2 gap-6">
             <Link 
@@ -127,6 +127,19 @@ const CrmDashboard = () => {
                 <h2 className="text-2xl font-semibold mb-2">Manage Case Studies</h2>
                 <p className="text-muted-foreground">
                   Edit or delete existing case studies from your portfolio
+                </p>
+              </div>
+            </Link>
+
+            <Link 
+              to="/crm/manage-site-content"
+              className="group"
+            >
+              <div className="border rounded-lg p-8 hover:shadow-lg transition-shadow bg-card">
+                <FileText className="h-12 w-12 mb-4 text-primary" />
+                <h2 className="text-2xl font-semibold mb-2">Manage Site Content</h2>
+                <p className="text-muted-foreground">
+                  Edit the About section text and other site content
                 </p>
               </div>
             </Link>

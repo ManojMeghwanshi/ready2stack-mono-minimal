@@ -1,11 +1,33 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import teamMemberImg from "@/assets/team-member.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const About = () => {
   const { elementRef: introRef, isVisible: introVisible } = useScrollAnimation(0.2);
   const { elementRef: bioRef, isVisible: bioVisible } = useScrollAnimation(0.2);
+  const [aboutText, setAboutText] = useState("");
+
+  useEffect(() => {
+    fetchAboutText();
+  }, []);
+
+  const fetchAboutText = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('site_content')
+        .select('content')
+        .eq('key', 'about_intro_text')
+        .single();
+
+      if (error) throw error;
+      if (data) setAboutText(data.content);
+    } catch (error) {
+      console.error("Error fetching about text:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -21,7 +43,7 @@ const About = () => {
               About
             </h2>
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal leading-tight tracking-tight">
-              We create world class digital design and development products. Our ethos is to develop strong partner relationships with our clients. Smart digital strategy development, crafted design and platform agnostic, pragmatic tech solutions. We push our clients to create world class digital products.
+              {aboutText || "We are passionate about turning data into clear, insightful business case studies. Our research team carefully analyzes available data to present stories of real business challenges, strategies, and successes. We aim to empower professionals and entrepreneurs with reliable insights to inspire smarter decisions."}
             </p>
           </div>
         </section>
