@@ -12,12 +12,9 @@ import { z } from "zod";
 const caseStudySchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200),
   subtitle: z.string().trim().max(300).optional(),
-  description: z.string().trim().min(1, "Description is required").max(5000),
+  description: z.string().trim().min(1, "Description is required").max(10000),
   category: z.string().trim().min(1, "Category is required").max(100),
   image_url: z.string().trim().url("Must be a valid URL").max(500),
-  challenge: z.string().trim().max(5000).optional(),
-  solution: z.string().trim().max(5000).optional(),
-  results: z.string().trim().max(5000).optional(),
 });
 
 const EditCaseStudy = () => {
@@ -34,9 +31,6 @@ const EditCaseStudy = () => {
     description: "",
     category: "",
     image_url: "",
-    challenge: "",
-    solution: "",
-    results: "",
   });
 
   useEffect(() => {
@@ -97,9 +91,6 @@ const EditCaseStudy = () => {
       description: data.description,
       category: data.category,
       image_url: data.image_url,
-      challenge: data.challenge || "",
-      solution: data.solution || "",
-      results: data.results || "",
     });
     setLoadingData(false);
   };
@@ -123,9 +114,6 @@ const EditCaseStudy = () => {
           description: validated.description,
           category: validated.category,
           image_url: validated.image_url,
-          challenge: validated.challenge || null,
-          solution: validated.solution || null,
-          results: validated.results || null,
         })
         .eq("id", id);
 
@@ -216,7 +204,7 @@ const EditCaseStudy = () => {
             </div>
 
             <div>
-              <Label htmlFor="image_url">Image URL *</Label>
+              <Label htmlFor="image_url">Blog Thumbnail Image URL *</Label>
               <Input
                 id="image_url"
                 name="image_url"
@@ -225,7 +213,11 @@ const EditCaseStudy = () => {
                 onChange={handleChange}
                 required
                 maxLength={500}
+                placeholder="https://example.com/thumbnail.jpg"
               />
+              <p className="text-sm text-muted-foreground mt-1">
+                Enter the URL of the thumbnail image for this case study
+              </p>
             </div>
 
             <div>
@@ -236,45 +228,13 @@ const EditCaseStudy = () => {
                 value={formData.description}
                 onChange={handleChange}
                 required
-                maxLength={5000}
-                className="min-h-[100px]"
+                maxLength={10000}
+                className="min-h-[200px]"
+                placeholder="Write your case study content here. You can include detailed descriptions, insights, and outcomes."
               />
-            </div>
-
-            <div>
-              <Label htmlFor="challenge">Challenge</Label>
-              <Textarea
-                id="challenge"
-                name="challenge"
-                value={formData.challenge}
-                onChange={handleChange}
-                maxLength={5000}
-                className="min-h-[100px]"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="solution">Solution</Label>
-              <Textarea
-                id="solution"
-                name="solution"
-                value={formData.solution}
-                onChange={handleChange}
-                maxLength={5000}
-                className="min-h-[100px]"
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="results">Results</Label>
-              <Textarea
-                id="results"
-                name="results"
-                value={formData.results}
-                onChange={handleChange}
-                maxLength={5000}
-                className="min-h-[100px]"
-              />
+              <p className="text-sm text-muted-foreground mt-1">
+                Supports text content (up to 10,000 characters)
+              </p>
             </div>
 
             <div className="flex gap-4">
