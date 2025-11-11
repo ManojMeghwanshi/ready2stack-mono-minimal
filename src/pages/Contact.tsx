@@ -1,11 +1,36 @@
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { MapPin } from "lucide-react";
 import mapPlaceholder from "@/assets/map-placeholder.jpg";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.2);
+  const [heading, setHeading] = useState("We'd love to chat about working together for the future.");
+  const [email, setEmail] = useState("hello@ready2stack.com");
+  const [phone, setPhone] = useState("+44 20 8123 4567");
+  const [address, setAddress] = useState("Alchemy Digital\n130 Borough High Street\nLondon, SE1 1LB\nUnited Kingdom");
+
+  useEffect(() => {
+    const fetchContent = async () => {
+      const { data } = await supabase
+        .from('site_content')
+        .select('*')
+        .in('key', ['contact_heading', 'contact_email', 'contact_phone', 'contact_address']);
+
+      if (data) {
+        data.forEach(item => {
+          if (item.key === 'contact_heading') setHeading(item.content);
+          if (item.key === 'contact_email') setEmail(item.content);
+          if (item.key === 'contact_phone') setPhone(item.content);
+          if (item.key === 'contact_address') setAddress(item.content);
+        });
+      }
+    };
+    fetchContent();
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -19,37 +44,34 @@ const Contact = () => {
             {/* Left - Contact Information */}
             <div className="p-8 sm:p-12 md:p-16 flex flex-col justify-center border-r-0 lg:border-r border-border">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-8 sm:mb-12 leading-tight">
-                We'd love to chat about working together for the future.
+                {heading}
               </h1>
               
               <div className="space-y-8 sm:space-y-10">
                 <div>
                   <h3 className="text-xs uppercase tracking-wider mb-2 opacity-60">Email</h3>
                   <a 
-                    href="mailto:hello@ready2stack.com" 
+                    href={`mailto:${email}`}
                     className="text-base sm:text-lg hover:opacity-60 transition-opacity"
                   >
-                    hello@ready2stack.com
+                    {email}
                   </a>
                 </div>
 
                 <div>
                   <h3 className="text-xs uppercase tracking-wider mb-2 opacity-60">Phone</h3>
                   <a 
-                    href="tel:+442081234567" 
+                    href={`tel:${phone.replace(/\s/g, '')}`}
                     className="text-base sm:text-lg hover:opacity-60 transition-opacity"
                   >
-                    +44 20 8123 4567
+                    {phone}
                   </a>
                 </div>
 
                 <div>
                   <h3 className="text-xs uppercase tracking-wider mb-2 opacity-60">Office Address</h3>
-                  <address className="text-base sm:text-lg not-italic leading-relaxed">
-                    Alchemy Digital<br />
-                    130 Borough High Street<br />
-                    London, SE1 1LB<br />
-                    United Kingdom
+                  <address className="text-base sm:text-lg not-italic leading-relaxed whitespace-pre-line">
+                    {address}
                   </address>
                 </div>
               </div>
