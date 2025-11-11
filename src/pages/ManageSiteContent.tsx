@@ -361,6 +361,65 @@ const ManageSiteContent = () => {
               </CardContent>
             </Card>
 
+            {/* About Us Page */}
+            <Card>
+              <CardHeader>
+                <CardTitle>About Us Page - Bio Section</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <Label htmlFor="about-bio-initials">Initials</Label>
+                  <input
+                    id="about-bio-initials"
+                    type="text"
+                    value={content.about_bio_initials?.value || ''}
+                    onChange={(e) => updateContent('about_bio_initials', e.target.value)}
+                    className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="about-bio-subtitle">Subtitle</Label>
+                  <input
+                    id="about-bio-subtitle"
+                    type="text"
+                    value={content.about_bio_subtitle?.value || ''}
+                    onChange={(e) => updateContent('about_bio_subtitle', e.target.value)}
+                    className="mt-2 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="about-bio-para1">Paragraph 1</Label>
+                  <Textarea
+                    id="about-bio-para1"
+                    value={content.about_bio_para1?.value || ''}
+                    onChange={(e) => updateContent('about_bio_para1', e.target.value)}
+                    rows={3}
+                    className="mt-2"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="about-bio-para2">Paragraph 2</Label>
+                  <Textarea
+                    id="about-bio-para2"
+                    value={content.about_bio_para2?.value || ''}
+                    onChange={(e) => updateContent('about_bio_para2', e.target.value)}
+                    rows={3}
+                    className="mt-2"
+                  />
+                </div>
+                <div>
+                  <Label htmlFor="about-bio-para3">Paragraph 3</Label>
+                  <Textarea
+                    id="about-bio-para3"
+                    value={content.about_bio_para3?.value || ''}
+                    onChange={(e) => updateContent('about_bio_para3', e.target.value)}
+                    rows={3}
+                    className="mt-2"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
             <Button onClick={handleSave} disabled={saving} size="lg">
               {saving ? (
                 <>

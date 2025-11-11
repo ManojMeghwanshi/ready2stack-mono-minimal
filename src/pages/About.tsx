@@ -9,23 +9,45 @@ const About = () => {
   const { elementRef: introRef, isVisible: introVisible } = useScrollAnimation(0.2);
   const { elementRef: bioRef, isVisible: bioVisible } = useScrollAnimation(0.2);
   const [aboutText, setAboutText] = useState("");
+  const [bioContent, setBioContent] = useState({
+    initials: "Z.R.",
+    subtitle: "a bit about myself",
+    para1: "With over a decade of experience in digital design and development, I've had the privilege of working with some of the world's most innovative companies.",
+    para2: "My approach combines strategic thinking with meticulous attention to detail, ensuring every project not only meets but exceeds expectations.",
+    para3: "I believe in building lasting partnerships with clients, understanding their vision, and translating it into exceptional digital experiences."
+  });
 
   useEffect(() => {
-    fetchAboutText();
+    fetchAboutContent();
   }, []);
 
-  const fetchAboutText = async () => {
+  const fetchAboutContent = async () => {
     try {
       const { data, error } = await supabase
         .from('site_content')
-        .select('content')
-        .eq('key', 'about_intro_text')
-        .single();
+        .select('key, content')
+        .in('key', ['about_intro_text', 'about_bio_initials', 'about_bio_subtitle', 'about_bio_para1', 'about_bio_para2', 'about_bio_para3']);
 
       if (error) throw error;
-      if (data) setAboutText(data.content);
+      
+      if (data) {
+        const contentMap: Record<string, string> = {};
+        data.forEach(item => {
+          contentMap[item.key] = item.content;
+        });
+        
+        if (contentMap.about_intro_text) setAboutText(contentMap.about_intro_text);
+        
+        setBioContent({
+          initials: contentMap.about_bio_initials || bioContent.initials,
+          subtitle: contentMap.about_bio_subtitle || bioContent.subtitle,
+          para1: contentMap.about_bio_para1 || bioContent.para1,
+          para2: contentMap.about_bio_para2 || bioContent.para2,
+          para3: contentMap.about_bio_para3 || bioContent.para3
+        });
+      }
     } catch (error) {
-      console.error("Error fetching about text:", error);
+      console.error("Error fetching about content:", error);
     }
   };
 
@@ -67,21 +89,15 @@ const About = () => {
             {/* Right - Bio Content */}
             <div className="bg-background border border-border p-8 sm:p-12 md:p-16 flex flex-col justify-center">
               <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mb-4 tracking-tight">
-                Z.R.
+                {bioContent.initials}
               </h1>
               <h2 className="text-lg sm:text-xl md:text-2xl mb-8 tracking-wide font-light">
-                a bit about myself
+                {bioContent.subtitle}
               </h2>
               <div className="space-y-4 text-sm sm:text-base leading-relaxed">
-                <p>
-                  With over a decade of experience in digital design and development, I've had the privilege of working with some of the world's most innovative companies.
-                </p>
-                <p>
-                  My approach combines strategic thinking with meticulous attention to detail, ensuring every project not only meets but exceeds expectations.
-                </p>
-                <p>
-                  I believe in building lasting partnerships with clients, understanding their vision, and translating it into exceptional digital experiences.
-                </p>
+                <p>{bioContent.para1}</p>
+                <p>{bioContent.para2}</p>
+                <p>{bioContent.para3}</p>
               </div>
             </div>
           </div>
