@@ -41,6 +41,11 @@ All colors MUST be HSL.
 
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Pastel blob colors for hero background */
+    --blob-cream: 40 40% 95%;
+    --blob-white: 0 0% 98%;
+    --blob-grey: 210 20% 93%;
   }
 }
 
@@ -68,13 +73,43 @@ All colors MUST be HSL.
 
   @keyframes float {
     0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(30px, -30px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(20px, -20px) scale(1.05);
+    }
+  }
+
+  @keyframes float-drift {
+    0%, 100% {
       transform: translate(0, 0);
     }
     33% {
-      transform: translate(20px, -20px);
+      transform: translate(-25px, 15px);
     }
     66% {
-      transform: translate(-20px, 20px);
+      transform: translate(15px, -25px);
+    }
+  }
+
+  @keyframes float-subtle {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+      transform: translate(10px, -15px) rotate(2deg);
     }
   }
 
@@ -97,17 +132,31 @@ All colors MUST be HSL.
   }
 
   .animate-float {
-    animation: float 12s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
 
   .animate-float-delayed {
-    animation: float 14s ease-in-out infinite;
-    animation-delay: 3s;
+    animation: float 8s ease-in-out 2s infinite;
   }
 
   .animate-float-slow {
-    animation: float 16s ease-in-out infinite;
-    animation-delay: 5s;
+    animation: float 12s ease-in-out 1s infinite;
+  }
+
+  .animate-float-gentle {
+    animation: float-gentle 10s ease-in-out infinite;
+  }
+
+  .animate-float-gentle-delayed {
+    animation: float-gentle 10s ease-in-out 3s infinite;
+  }
+
+  .animate-float-drift {
+    animation: float-drift 15s ease-in-out infinite;
+  }
+
+  .animate-float-subtle {
+    animation: float-subtle 20s ease-in-out infinite;
   }
 
   /* Scroll animations */
