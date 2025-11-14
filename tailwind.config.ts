@@ -60,11 +60,6 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        blob: {
-          cream: "hsl(var(--blob-cream))",
-          white: "hsl(var(--blob-white))",
-          grey: "hsl(var(--blob-grey))",
-        },
       },
       borderRadius: {
         lg: "var(--radius)",
