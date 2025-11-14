@@ -135,35 +135,6 @@ const ManageSiteContent = () => {
           </div>
 
           <div className="space-y-6">
-            {/* Hero Section */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Hero Section</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <Label htmlFor="hero-title">Hero Title</Label>
-                  <Textarea
-                    id="hero-title"
-                    value={content.hero_title?.value || ''}
-                    onChange={(e) => updateContent('hero_title', e.target.value)}
-                    rows={3}
-                    className="mt-2"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="hero-subtitle">Hero Subtitle</Label>
-                  <Textarea
-                    id="hero-subtitle"
-                    value={content.hero_subtitle?.value || ''}
-                    onChange={(e) => updateContent('hero_subtitle', e.target.value)}
-                    rows={2}
-                    className="mt-2"
-                  />
-                </div>
-              </CardContent>
-            </Card>
-
             {/* About Section */}
             <Card>
               <CardHeader>
