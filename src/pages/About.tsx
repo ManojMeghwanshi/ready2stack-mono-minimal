@@ -11,11 +11,12 @@ const About = () => {
   const aboutText = "We are passionate about turning data into clear, insightful business case studies. Our research team carefully analyzes available data to present stories of real business challenges, strategies, and successes. We aim to empower professionals and entrepreneurs with reliable insights to inspire smarter decisions.";
   
   const bioContent = {
-    initials: "Z.R.",
-    subtitle: "a bit about myself",
-    para1: "With over a decade of experience in digital design and development, I've had the privilege of working with some of the world's most innovative companies.",
-    para2: "My approach combines strategic thinking with meticulous attention to detail, ensuring every project not only meets but exceeds expectations.",
-    para3: "I believe in building lasting partnerships with clients, understanding their vision, and translating it into exceptional digital experiences."
+    name: "Palak Bhatia",
+    heading: "Hi, I'm Palak",
+    para1: "I'm a full-time freelancer, an MBA student and a business aspirant. All at the same time? Let me explain For almost 2 years, I worked at a Digital Marketing Agency. I worked for 20+ brands and wore multiple hats like business strategy, marketing strategy, performance marketing, Google ads, Facebook ads, sales, and more.",
+    para2: "After 2 years at this agency, I asked \"What next\"? A high-paying job was never on my mind. I always wanted to start a business. But there was a lot I still needed to learn. However, I wanted to start my business while learning, not after learning. I decided to take up an online MBA and start my freelancing business.",
+    para3: "My aim with freelancing is to take limited clients at a time but deliver the best strategies and execution that bring actual results. In the end, I want to see my clients happy and satisfied. If you're looking for a marketing freelancer, who can wear multiple hats and deliver results, let's connect. Please email me at palakbhatia192000@gmail.com",
+    para4: "If you're not, let's connect and have a quick chat, with all things professional."
   };
 
   return (
@@ -55,16 +56,17 @@ const About = () => {
 
             {/* Right - Bio Content */}
             <div className="bg-background border border-border p-8 sm:p-12 md:p-16 flex flex-col justify-center">
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif font-bold mb-4 tracking-tight">
-                {bioContent.initials}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight">
+                {bioContent.name}
               </h1>
-              <h2 className="text-lg sm:text-xl md:text-2xl mb-8 tracking-wide font-light">
-                {bioContent.subtitle}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl mb-8 tracking-wide font-semibold">
+                {bioContent.heading}
               </h2>
               <div className="space-y-4 text-sm sm:text-base leading-relaxed">
                 <p>{bioContent.para1}</p>
                 <p>{bioContent.para2}</p>
                 <p>{bioContent.para3}</p>
+                <p>{bioContent.para4}</p>
               </div>
             </div>
           </div>
