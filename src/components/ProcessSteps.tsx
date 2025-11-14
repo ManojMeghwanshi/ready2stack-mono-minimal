@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
 import { Search, TrendingUp, FileText } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { supabase } from "@/integrations/supabase/client";
 
 const ProcessSteps = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.15);
-  const [steps, setSteps] = useState([
+  
+  // Edit content directly here
+  const steps = [
     {
       number: "01",
       icon: Search,
@@ -24,49 +24,7 @@ const ProcessSteps = () => {
       title: "Case Study",
       description: "Related to case study."
     }
-  ]);
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      const { data } = await supabase
-        .from('site_content')
-        .select('*')
-        .in('key', [
-          'process_step1_title', 'process_step1_description',
-          'process_step2_title', 'process_step2_description',
-          'process_step3_title', 'process_step3_description'
-        ]);
-
-      if (data) {
-        const contentMap: Record<string, string> = {};
-        data.forEach(item => {
-          contentMap[item.key] = item.content;
-        });
-
-        setSteps([
-          {
-            number: "01",
-            icon: Search,
-            title: contentMap.process_step1_title || "Research",
-            description: contentMap.process_step1_description || "Related to research."
-          },
-          {
-            number: "02",
-            icon: TrendingUp,
-            title: contentMap.process_step2_title || "Analyze",
-            description: contentMap.process_step2_description || "Related to analyze."
-          },
-          {
-            number: "03",
-            icon: FileText,
-            title: contentMap.process_step3_title || "Case Study",
-            description: contentMap.process_step3_description || "Related to case study."
-          }
-        ]);
-      }
-    };
-    fetchContent();
-  }, []);
+  ];
 
   return (
     <section 

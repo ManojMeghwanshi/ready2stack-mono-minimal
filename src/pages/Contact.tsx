@@ -1,36 +1,17 @@
-import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { MapPin } from "lucide-react";
 import mapPlaceholder from "@/assets/map-placeholder.jpg";
-import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.2);
-  const [heading, setHeading] = useState("We'd love to chat about working together for the future.");
-  const [email, setEmail] = useState("hello@ready2stack.com");
-  const [phone, setPhone] = useState("+44 20 8123 4567");
-  const [address, setAddress] = useState("Alchemy Digital\n130 Borough High Street\nLondon, SE1 1LB\nUnited Kingdom");
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      const { data } = await supabase
-        .from('site_content')
-        .select('*')
-        .in('key', ['contact_heading', 'contact_email', 'contact_phone', 'contact_address']);
-
-      if (data) {
-        data.forEach(item => {
-          if (item.key === 'contact_heading') setHeading(item.content);
-          if (item.key === 'contact_email') setEmail(item.content);
-          if (item.key === 'contact_phone') setPhone(item.content);
-          if (item.key === 'contact_address') setAddress(item.content);
-        });
-      }
-    };
-    fetchContent();
-  }, []);
+  
+  // Edit content directly here
+  const heading = "We'd love to chat about working together for the future.";
+  const email = "palak@studio1to10.com";
+  const phone = "+44 20 8123 4567";
+  const address = "Alchemy Digital\n130 Borough High Street\nLondon, SE1 1LB\nUnited Kingdom";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
