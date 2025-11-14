@@ -1,54 +1,21 @@
-import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import teamMemberImg from "@/assets/team-member.jpg";
-import { supabase } from "@/integrations/supabase/client";
 
 const About = () => {
   const { elementRef: introRef, isVisible: introVisible } = useScrollAnimation(0.2);
   const { elementRef: bioRef, isVisible: bioVisible } = useScrollAnimation(0.2);
-  const [aboutText, setAboutText] = useState("");
-  const [bioContent, setBioContent] = useState({
+  
+  // Edit content directly here
+  const aboutText = "We are passionate about turning data into clear, insightful business case studies. Our research team carefully analyzes available data to present stories of real business challenges, strategies, and successes. We aim to empower professionals and entrepreneurs with reliable insights to inspire smarter decisions.";
+  
+  const bioContent = {
     initials: "Z.R.",
     subtitle: "a bit about myself",
     para1: "With over a decade of experience in digital design and development, I've had the privilege of working with some of the world's most innovative companies.",
     para2: "My approach combines strategic thinking with meticulous attention to detail, ensuring every project not only meets but exceeds expectations.",
     para3: "I believe in building lasting partnerships with clients, understanding their vision, and translating it into exceptional digital experiences."
-  });
-
-  useEffect(() => {
-    fetchAboutContent();
-  }, []);
-
-  const fetchAboutContent = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('site_content')
-        .select('key, content')
-        .in('key', ['about_intro_text', 'about_bio_initials', 'about_bio_subtitle', 'about_bio_para1', 'about_bio_para2', 'about_bio_para3']);
-
-      if (error) throw error;
-      
-      if (data) {
-        const contentMap: Record<string, string> = {};
-        data.forEach(item => {
-          contentMap[item.key] = item.content;
-        });
-        
-        if (contentMap.about_intro_text) setAboutText(contentMap.about_intro_text);
-        
-        setBioContent({
-          initials: contentMap.about_bio_initials || bioContent.initials,
-          subtitle: contentMap.about_bio_subtitle || bioContent.subtitle,
-          para1: contentMap.about_bio_para1 || bioContent.para1,
-          para2: contentMap.about_bio_para2 || bioContent.para2,
-          para3: contentMap.about_bio_para3 || bioContent.para3
-        });
-      }
-    } catch (error) {
-      console.error("Error fetching about content:", error);
-    }
   };
 
   return (
@@ -65,7 +32,7 @@ const About = () => {
               About
             </h2>
             <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-normal leading-tight tracking-tight">
-              {aboutText || "We are passionate about turning data into clear, insightful business case studies. Our research team carefully analyzes available data to present stories of real business challenges, strategies, and successes. We aim to empower professionals and entrepreneurs with reliable insights to inspire smarter decisions."}
+              {aboutText}
             </p>
           </div>
         </section>

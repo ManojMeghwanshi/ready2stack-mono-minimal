@@ -1,33 +1,14 @@
-import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { supabase } from "@/integrations/supabase/client";
 
 const Footer = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.1);
-  const [cta, setCta] = useState("Let's Talk ↘");
-  const [companyName, setCompanyName] = useState("Alchemy Digital");
-  const [addressLine1, setAddressLine1] = useState("130 Borough High Street");
-  const [addressLine2, setAddressLine2] = useState("London, SE1 1LB");
-
-  useEffect(() => {
-    const fetchContent = async () => {
-      const { data } = await supabase
-        .from('site_content')
-        .select('*')
-        .in('key', ['footer_cta', 'footer_company_name', 'footer_address_line1', 'footer_address_line2']);
-
-      if (data) {
-        data.forEach(item => {
-          if (item.key === 'footer_cta') setCta(item.content);
-          if (item.key === 'footer_company_name') setCompanyName(item.content);
-          if (item.key === 'footer_address_line1') setAddressLine1(item.content);
-          if (item.key === 'footer_address_line2') setAddressLine2(item.content);
-        });
-      }
-    };
-    fetchContent();
-  }, []);
+  
+  // Edit content directly here
+  const cta = "Let's Talk ↘";
+  const companyName = "Alchemy Digital";
+  const addressLine1 = "130 Borough High Street";
+  const addressLine2 = "London, SE1 1LB";
   return <footer ref={elementRef as React.RefObject<HTMLElement>} className={`bg-primary text-primary-foreground py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
       <div className="container mx-auto px-4 sm:px-6">
         {/* Main CTA */}
