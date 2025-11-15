@@ -56,9 +56,6 @@ const About = () => {
 
             {/* Right - Bio Content */}
             <div className="bg-background border border-border p-8 sm:p-12 md:p-16 flex flex-col justify-center">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-                {bioContent.name}
-              </h1>
               <h2 className="text-2xl sm:text-3xl md:text-4xl mb-8 tracking-wide font-semibold">
                 {bioContent.heading}
               </h2>
