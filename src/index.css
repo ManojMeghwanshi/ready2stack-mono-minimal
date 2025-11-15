@@ -39,6 +39,10 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
+    /* Brand color - warm brown for logo */
+    --brand: 30 75% 30%;
+    --brand-foreground: 0 0% 100%;
+
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
