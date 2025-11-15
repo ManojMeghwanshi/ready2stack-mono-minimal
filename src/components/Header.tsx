@@ -5,8 +5,8 @@ const Header = () => {
   return <header className="sticky top-0 z-50 bg-background border-b border-border">
       <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4 md:py-5 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="text-base sm:text-lg md:text-xl font-bold tracking-tight hover:opacity-60 transition-opacity">
-          Ready 2 Stack
+        <Link to="/" className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold tracking-tight hover:opacity-80 transition-opacity" style={{ color: 'hsl(var(--brand))' }}>
+          Palak.
         </Link>
 
         {/* Navigation Links */}
