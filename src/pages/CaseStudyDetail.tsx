@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import ReactMarkdown from "react-markdown";
 import { supabase } from "@/integrations/supabase/client";
 
 interface CaseStudy {
@@ -87,6 +88,18 @@ const CaseStudyDetail = () => {
               <span>•</span>
               <span>{new Date(caseStudy.created_at).toLocaleDateString()}</span>
             </div>
+
+            {/* Title */}
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 leading-tight tracking-tight">
+              {caseStudy.title}
+            </h1>
+            
+            {/* Subtitle/Summary */}
+            {caseStudy.subtitle && (
+              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10">
+                {caseStudy.subtitle}
+              </p>
+            )}
           </div>
 
           {/* Featured Image */}
@@ -101,20 +114,21 @@ const CaseStudyDetail = () => {
           </div>
 
           <div className="max-w-4xl mx-auto">
-            {/* Title */}
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 sm:mb-8 md:mb-10 leading-tight tracking-tight">
-              {caseStudy.title}
-            </h1>
-            
-            {/* Subtitle/Summary */}
-            {caseStudy.subtitle && (
-              <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12">
-                {caseStudy.subtitle}
-              </p>
-            )}
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed mb-8 sm:mb-10 md:mb-12">
-              {caseStudy.description}
-            </p>
+            {/* Description with markdown support */}
+            <div className="prose prose-lg max-w-none mb-8 sm:mb-10 md:mb-12">
+              <ReactMarkdown
+                components={{
+                  img: ({ node, ...props }) => (
+                    <img {...props} className="rounded-lg w-full h-auto my-6" />
+                  ),
+                  p: ({ node, ...props }) => (
+                    <p {...props} className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-4" />
+                  ),
+                }}
+              >
+                {caseStudy.description}
+              </ReactMarkdown>
+            </div>
           </div>
         </section>
 
