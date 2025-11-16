@@ -4,10 +4,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft } from "lucide-react";
 import { z } from "zod";
+import { MarkdownEditor } from "@/components/MarkdownEditor";
 
 const caseStudySchema = z.object({
   title: z.string().trim().min(1, "Title is required").max(200),
@@ -97,6 +97,10 @@ const EditCaseStudy = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleDescriptionChange = (value: string) => {
+    setFormData({ ...formData, description: value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -221,20 +225,13 @@ const EditCaseStudy = () => {
             </div>
 
             <div>
-              <Label htmlFor="description">Description *</Label>
-              <Textarea
-                id="description"
-                name="description"
+              <MarkdownEditor
+                label="Description *"
                 value={formData.description}
-                onChange={handleChange}
-                required
-                maxLength={10000}
-                className="min-h-[200px]"
-                placeholder="Write your case study content here. You can include detailed descriptions, insights, and outcomes."
+                onChange={handleDescriptionChange}
+                placeholder="Write your case study content here. You can include detailed descriptions, insights, and outcomes. Use markdown formatting and insert images using the toolbar."
+                rows={15}
               />
-              <p className="text-sm text-muted-foreground mt-1">
-                Supports text content (up to 10,000 characters)
-              </p>
             </div>
 
             <div className="flex gap-4">
