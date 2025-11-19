@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import teamMemberImg from "@/assets/team-member.jpg";
+import teamMemberImg from "@/assets/palak-profile.jpg";
 
 const About = () => {
   const { elementRef: introRef, isVisible: introVisible } = useScrollAnimation(0.2);
