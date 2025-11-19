@@ -10,19 +10,19 @@ const ProcessSteps = () => {
       number: "01",
       icon: Search,
       title: "Research",
-      description: "Related to research."
+      description: "Gathering insights and understanding the challenge"
     },
     {
       number: "02",
       icon: TrendingUp,
       title: "Analyze",
-      description: "Related to analyze."
+      description: "Identifying patterns and opportunities"
     },
     {
       number: "03",
       icon: FileText,
       title: "Case Study",
-      description: "Related to case study."
+      description: "Showcasing outcomes and measurable success"
     }
   ];
 
