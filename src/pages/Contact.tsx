@@ -10,7 +10,7 @@ const Contact = () => {
   // Edit content directly here
   const heading = "We'd love to chat about working together for the future.";
   const email = "palak@studio1to10.com";
-  const address = "Alchemy Digital\n130 Borough High Street\nLondon, SE1 1LB\nUnited Kingdom";
+  const address = "Ajmer, Rajasthan, India";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
