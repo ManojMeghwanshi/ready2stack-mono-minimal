@@ -10,7 +10,6 @@ const Contact = () => {
   // Edit content directly here
   const heading = "We'd love to chat about working together for the future.";
   const email = "palak@studio1to10.com";
-  const phone = "+44 20 8123 4567";
   const address = "Alchemy Digital\n130 Borough High Street\nLondon, SE1 1LB\nUnited Kingdom";
 
   return (
@@ -36,16 +35,6 @@ const Contact = () => {
                     className="text-base sm:text-lg hover:opacity-60 transition-opacity"
                   >
                     {email}
-                  </a>
-                </div>
-
-                <div>
-                  <h3 className="text-xs uppercase tracking-wider mb-2 opacity-60">Phone</h3>
-                  <a 
-                    href={`tel:${phone.replace(/\s/g, '')}`}
-                    className="text-base sm:text-lg hover:opacity-60 transition-opacity"
-                  >
-                    {phone}
                   </a>
                 </div>
 
