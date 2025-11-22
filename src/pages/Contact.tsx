@@ -1,8 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { MapPin } from "lucide-react";
-import mapPlaceholder from "@/assets/map-placeholder.jpg";
 
 const Contact = () => {
   const { elementRef, isVisible } = useScrollAnimation(0.2);
@@ -20,9 +18,9 @@ const Contact = () => {
           ref={elementRef as React.RefObject<HTMLElement>}
           className={`container mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}
         >
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 border border-border bg-background">
-            {/* Left - Contact Information */}
-            <div className="p-8 sm:p-12 md:p-16 flex flex-col justify-center border-r-0 lg:border-r border-border">
+          <div className="grid grid-cols-1 gap-0 border border-border bg-background">
+            {/* Contact Information */}
+            <div className="p-8 sm:p-12 md:p-16 flex flex-col justify-center">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-8 sm:mb-12 leading-tight">
                 {heading}
               </h1>
@@ -44,19 +42,6 @@ const Contact = () => {
                     {address}
                   </address>
                 </div>
-              </div>
-            </div>
-
-            {/* Right - Map */}
-            <div className="relative h-[400px] lg:h-auto bg-muted">
-              <img 
-                src={mapPlaceholder} 
-                alt="Location map" 
-                className="w-full h-full object-cover grayscale"
-                loading="lazy"
-              />
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <MapPin className="w-12 h-12 text-primary" fill="currentColor" />
               </div>
             </div>
           </div>
