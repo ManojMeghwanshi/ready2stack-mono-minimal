@@ -6,7 +6,7 @@ const Footer = () => {
   
   // Edit content directly here
   const cta = "Let's Talk ↘";
-  const companyName = "Alchemy Digital";
+  const companyName = "";
   const addressLine1 = "Vaishali Nagar, Ajmer";
   const addressLine2 = "Rajasthan, India";
   return <footer ref={elementRef as React.RefObject<HTMLElement>} className={`bg-primary text-primary-foreground py-12 sm:py-16 md:py-20 scroll-hidden ${isVisible ? 'scroll-visible' : ''}`}>
